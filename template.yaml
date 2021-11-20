@@ -55,5 +55,6 @@ Resources:
         - Arn
       Runtime: python3.9
       Timeout: '60'
+      CodeUri: ./index-photos.py
     DependsOn:
       - IndexLambdaRole
