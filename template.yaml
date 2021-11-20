@@ -7,4 +7,4 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: python3.9
-      CodeUri: ./
+      CodeUri: ./index-photos.py
