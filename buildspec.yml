@@ -7,6 +7,7 @@ phases:
       - echo "No dependencies!"
   build:
     commands:
+      - ls
       - cd lib
       - zip -r9 ../index.zip .
       - cd ..
