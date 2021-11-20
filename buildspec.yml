@@ -7,13 +7,12 @@ phases:
       - echo "No dependencies!"
   build:
     commands:
-      - zip -r9 ./index.zip .
+      - zip -r9 ./index.zip ./index-photos.py
       - ls
-      - zip -g index.zip index-photos.py
-      - ls
+      - zip -r9 ./search.zip ./search-photos.py
   post_build:
     commands:
       - echo "Updating lambdas"
-      - ls
       - aws lambda update-function-code --function-name index-photos2 --zip-file fileb://index.zip
+      - aws lambda update-function-code --function-name search-photos2 --zip-file fileb://search.zip
       - echo "Updates completed"
