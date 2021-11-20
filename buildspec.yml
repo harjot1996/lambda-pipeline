@@ -12,6 +12,7 @@ phases:
       - mv lambda_function.py index-photos.py
       - mv search-photos.py lambda_function.py
       - zip -r9 ./search.zip ./lambda_function.py
+      - ls
   post_build:
     commands:
       - echo "Updating lambdas"
