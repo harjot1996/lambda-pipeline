@@ -7,11 +7,12 @@ phases:
       - echo "No dependencies!"
   build:
     commands:
-      - ls
-      - cd lib
       - zip -r9 ../index.zip .
+      - ls
       - cd ..
+      - ls
       - zip -g index.zip index-photos.py
+      - ls
   post_build:
     commands:
       - echo "Updating lambdas"
