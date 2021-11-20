@@ -1,8 +1,67 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Description: Test template
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  This Lambda function does something
+Parameters:
+  ProjectId:
+    Description: AWS CodeStar projectID used to associate new resources to team members
+    Type: String
 Resources:
-  LambdaFunctionIndex:
-    Type: AWS::Lambda::Function
+  DownloadRole:
+    Type: 'AWS::IAM::Role'
     Properties:
-      Handler: lambda_function.lambda_handler
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: ''
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: 'sts:AssumeRole'
+      Policies:
+        - PolicyName: PutS3Policy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                  - 's3:PutObject'
+                  - 's3:PutObjectAcl'
+                  - 's3:PutObjectTagging'
+                  - 'sns:Publish'
+                Resource:
+                  - 'arn:aws:logs:*:*:*'
+                  - 'arn:aws:s3:::myBucket'
+                  - 'arn:aws:s3:::myBucket/*'
+                  - 'arn:aws:sns:us-east-1:xxxxxxxxxxxx:SNS_TOPIC'
+      Path: /
+  DownloadFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: 'lambda_function.lambda_handler'
+      MemorySize: '256'
+      Description: A scheduled Lambda function
+      FunctionName: Download
+      Role: !GetAtt 
+        - DownloadRole
+        - Arn
       Runtime: python3.9
+      Timeout: '60'
+    DependsOn:
+      - DownloadRole
+  LambdaInvokePermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !GetAtt 
+        - DownloadFunction
+        - Arn
+      Action: 'lambda:InvokeFunction'
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt 
+        - ScheduleRule
+        - Arn
+    DependsOn:
+      - DownloadFunction
+      - ScheduleRule
