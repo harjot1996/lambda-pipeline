@@ -7,8 +7,10 @@ phases:
       - echo "No dependencies!"
   build:
     commands:
-      - zip -r9 ./index.zip ./index-photos.py
-      - ls
+      - mv index-photos.py lambda_function.py
+      - zip -r9 ./index.zip ./lambda_function.py
+      - mv lambda_function.py index-photos.py
+      - mv search-photos.py lambda_function.py
       - zip -r9 ./search.zip ./search-photos.py
   post_build:
     commands:
