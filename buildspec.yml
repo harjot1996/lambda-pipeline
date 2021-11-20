@@ -1,0 +1,23 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - echo "No dependencies!"
+  build:
+    commands:
+      - cd lib
+      - zip -r9 ../index.zip .
+      - cd ..
+      - zip -g index.zip index-photos.py
+      - cd lib
+      - zip -r9 ../search.zip .
+      - cd ..
+      - zip -g search.zip search-photos.py
+  post_build:
+    commands:
+      - echo "Updating lambdas"
+      - aws lambda update-function-code --function-name index-photos2 --zip-file fileb://index.zip
+      - aws lambda update-function-code --function-name search-photos2 --zip-file fileb://search.zip
+      - echo "Updates completed"
