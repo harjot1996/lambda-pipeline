@@ -15,8 +15,33 @@ Resources:
             Action: 'sts:AssumeRole'
       Policies:
         - PolicyName: AmazonS3FullAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 's3:*'
+                  - 's3-object-lambda:*'
+                Resource:
+                  - '*'
         - PolicyName: AmazonRekognitionFullAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'rekognition:*'
+                Resource:
+                  - '*'
         - PolicyName: AmazonOpenSearchServiceFullAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'es:*'
+                Resource:
+                  - '*'
       Path: /
   IndexLambda:
     Type: 'AWS::Lambda::Function'
