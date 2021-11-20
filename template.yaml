@@ -1,10 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
   This Lambda function does something
-Parameters:
-  ProjectId:
-    Description: AWS CodeStar projectID used to associate new resources to team members
-    Type: String
 Resources:
   IndexLambdaRole:
     Type: 'AWS::IAM::Role'
