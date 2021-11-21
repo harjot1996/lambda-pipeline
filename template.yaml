@@ -1,7 +1,7 @@
 Parameters:
   BucketName:
     Type: String
-    Default: b2-photos-00CF
+    Default: b2-photos-zero-cf
   PrivateSubnet:
     Description: Choose which subnets the Lambda-functions should be deployed to
     Type: AWS::EC2::Subnet::Id
