@@ -1,7 +1,7 @@
 Parameters:
   BucketName:
     Type: String
-    Default: photo-album-hsakv
+    Default: b2-photos-00CF
   PrivateSubnet:
     Description: Choose which subnets the Lambda-functions should be deployed to
     Type: AWS::EC2::Subnet::Id
@@ -102,4 +102,20 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: s3.amazonaws.com
       SourceArn:
-        Fn::Sub: arn:aws:s3:::b2-foto
+        Fn::Sub: arn:aws:s3:::${BucketName}
+
+  StorageBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: ExampleInvokePermission
+    AccessControl: Public
+    PublicAccessBlockConfiguration:
+      BlockPublicAcls: false
+      BlockPublicPolicy: false
+      IgnorePublicAcls: false
+      RestrictPublicBuckets: false
+    Properties:
+      BucketName: !Ref S3BucketName
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt [ IndexLambda, Arn]
