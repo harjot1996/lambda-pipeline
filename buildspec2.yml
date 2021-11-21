@@ -7,6 +7,9 @@ phases:
     commands:
       - export BUCKET=codepipeline-us-east-1-588042790805
       - aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yaml --debug
+  post_build:
+    commands:
+      - ls
 artifacts:
   type: zip
   files:
