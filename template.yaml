@@ -2,6 +2,14 @@ Parameters:
   BucketName:
     Type: String
     Default: photo-album-hsakv
+  PrivateSubnet:
+    Description: Choose which subnets the Lambda-functions should be deployed to
+    Type: AWS::EC2::Subnet::Id
+    Default: subnet-08034b18ca6b04788
+  SecurityGroup:
+    Description: Select the Security Group to use for the Lambda-functions
+    Type: AWS::EC2::SecurityGroup::Id
+    Default: sg-09d3b32ac839df60b
 
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
@@ -10,6 +18,11 @@ Resources:
   IndexLambdaRole:
     Type: 'AWS::IAM::Role'
     Properties:
+      VpcConfig:
+        SecurityGroupIds:
+          - !Ref SecurityGroup
+        SubnetIds:
+          - !Ref PrivateSubnet
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
