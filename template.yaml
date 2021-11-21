@@ -73,12 +73,10 @@ Resources:
       SourceArn:
         Fn::Sub: arn:aws:s3:::b2-foto
   
-  Bucket:
-    Type: AWS::S3::Bucket
+  LambdaTrigger:
+    Type: 'Custom::LambdaTrigger'
     DependsOn: LambdaInvokePermission
     Properties:
-      BucketName: !Ref BucketName
-      NotificationConfiguration:
-        LambdaConfigurations:
-        - Event: 's3:ObjectCreated:*'
-          Function: !GetAtt IndexLambda.Arn
+      ServiceToken: !GetAtt IndexLambda.Arn
+      LambdaArn: !GetAtt IndexLambda.Arn
+      Bucket: !Ref BucketName
