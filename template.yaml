@@ -46,7 +46,7 @@ Resources:
   IndexLambda:
     Type: 'AWS::Lambda::Function'
     Properties:
-      Handler: 'lambda_function.lambda_handler'
+      Handler: 'index-photos.lambda_handler'
       MemorySize: '256'
       Description: It is a Lambda function
       FunctionName: 'index-photos-3'
