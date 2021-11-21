@@ -46,6 +46,24 @@ Resources:
                   - 'rekognition:*'
                 Resource:
                   - '*'
+        - PolicyName: EC2FullAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'ec2:*'
+                Resource:
+                  - '*'
+        - PolicyName: LogFullAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'logs:*'
+                Resource:
+                  - '*'
         - PolicyName: AmazonOpenSearchServiceFullAccess
           PolicyDocument:
             Version: 2012-10-17
