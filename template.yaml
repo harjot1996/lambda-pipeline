@@ -10,9 +10,6 @@ Parameters:
     Description: Select the Security Group to use for the Lambda-functions
     Type: AWS::EC2::SecurityGroup::Id
     Default: sg-09d3b32ac839df60b
-  DeployStage:
-    Type: String
-    Default: v1
 
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
@@ -321,7 +318,7 @@ Resources:
         - RestApiId: !Ref ApiGateway
           StageName: v1
 
-  KeyUsagePlan:
+  UsagePlan:
     Type: 'AWS::ApiGateway::UsagePlan'
     Properties:
       ApiStages:
@@ -335,3 +332,10 @@ Resources:
         BurstLimit: 200
         RateLimit: 100
       UsagePlanName: Plan_test
+
+  UsagePlanKey:
+    Type: 'AWS::ApiGateway::UsagePlanKey'
+    Properties:
+      KeyId: !Ref ApiKey
+      KeyType: API_KEY
+      UsagePlanId: !Ref UsagePlan
