@@ -15,9 +15,9 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: >-
   This Lambda function does something
 Resources:
-  RestApi :
-    Type : AWS::ApiGateway::RestApi
-      Properties :
-        Body: ./api.yaml
-        Name : test-api
+  ApiGateway:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Body: ./api.yaml
+      Name : test-api
     
