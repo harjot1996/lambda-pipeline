@@ -107,13 +107,13 @@ Resources:
   StorageBucket:
     Type: AWS::S3::Bucket
     DependsOn: ExampleInvokePermission
-    AccessControl: Public
-    PublicAccessBlockConfiguration:
-      BlockPublicAcls: false
-      BlockPublicPolicy: false
-      IgnorePublicAcls: false
-      RestrictPublicBuckets: false
     Properties:
+      AccessControl: Public
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
       BucketName: !Ref S3BucketName
       NotificationConfiguration:
         LambdaConfigurations:
