@@ -72,11 +72,3 @@ Resources:
       Principal: s3.amazonaws.com
       SourceArn:
         Fn::Sub: arn:aws:s3:::b2-foto
-  
-  LambdaTrigger:
-    Type: 'Custom::LambdaTrigger'
-    DependsOn: LambdaInvokePermission
-    Properties:
-      ServiceToken: !GetAtt IndexLambda.Arn
-      LambdaArn: !GetAtt IndexLambda.Arn
-      Bucket: !Ref BucketName
