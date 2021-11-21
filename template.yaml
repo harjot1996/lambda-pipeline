@@ -78,7 +78,7 @@ Resources:
                   - '*'
       Path: /
 
-SearchLambdaRole:
+  SearchLambdaRole:
     Type: 'AWS::IAM::Role'
     Properties:
       AssumeRolePolicyDocument:
