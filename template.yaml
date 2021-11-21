@@ -1,7 +1,7 @@
 Parameters:
   BucketName:
     Type: String
-    Default: b2-foto
+    Default: photo-album-hsakv
 
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
