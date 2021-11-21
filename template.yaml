@@ -18,7 +18,7 @@ Resources:
   ApiGateway:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Name : test-api
+      Name : Photo Api CF
       Description: test description
       Body:
         swagger: "2.0"
@@ -300,10 +300,20 @@ Resources:
         x-amazon-apigateway-binary-media-types:
         - "*/*"
   
-  Deployment:
+  ApiDeployment:
     DependsOn: ApiGateway
     Type: 'AWS::ApiGateway::Deployment'
     Properties:
       RestApiId: !Ref ApiGateway
       Description: v1 deployment
       StageName: v1
+
+  ApiKey:
+    Type: 'AWS::ApiGateway::ApiKey'
+    Properties:
+      Name: CFApiKey
+      Description: CloudFormation API Key V1
+      Enabled: true
+      StageKeys:
+        - RestApiId: !Ref ApiGateway
+          StageName: v1
