@@ -1,3 +1,8 @@
+Parameters:
+  BucketName:
+    Type: String
+    Default: b2-foto
+
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
   This Lambda function does something
@@ -72,7 +77,7 @@ Resources:
     Type: AWS::S3::Bucket
     DependsOn: LambdaInvokePermission
     Properties:
-      BucketName: !Ref b2-foto
+      BucketName: !Ref BucketName
       NotificationConfiguration:
         LambdaConfigurations:
         - Event: 's3:ObjectCreated:*'
