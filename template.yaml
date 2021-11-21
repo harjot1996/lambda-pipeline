@@ -96,7 +96,7 @@ Resources:
               x-amazon-apigateway-integration:
                 credentials: "arn:aws:iam::773710002038:role/role-for-gateway"
                 httpMethod: "POST"
-                uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:773710002038:function:search-photos-cf/invocations"
+                uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:773710002038:function:search-photos/invocations"
                 responses:
                   default:
                     statusCode: "200"
