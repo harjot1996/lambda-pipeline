@@ -117,7 +117,7 @@ Resources:
       Description: It is a Lambda function
       FunctionName: 'search-photos-cf'
       Role: !GetAtt 
-        - IndexLambdaRole
+        - SearchLambdaRole
         - Arn
       Runtime: python3.9
       Timeout: '60'
