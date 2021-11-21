@@ -58,3 +58,20 @@ Resources:
       Code: ./index-photos.py
     DependsOn:
       - IndexLambdaRole
+  
+  LambdaInvokePermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !GetAtt IndexLambda.Arn
+      Action: 'lambda:InvokeFunction'
+      Principal: s3.amazonaws.com
+      SourceAccount: !Ref 'AWS::773710002038'
+      SourceArn: !Sub 'arn:aws:s3:::b2-foto'
+  
+  LambdaTrigger:
+    Type: 'Custom::LambdaTrigger'
+    DependsOn: LambdaInvokePermission
+    Properties:
+      ServiceToken: !GetAtt IndexLambda.Arn
+      LambdaArn: !GetAtt IndexLambda.Arn
+      Bucket: !Ref b2-foto
