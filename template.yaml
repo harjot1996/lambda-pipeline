@@ -326,7 +326,7 @@ Resources:
     Properties:
       ApiStages:
         - ApiId: !Ref ApiGateway
-          Stage: !Ref v1
+          Stage: v1
       Description: api key usage plan
       Quota:
         Limit: 5000
