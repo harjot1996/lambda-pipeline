@@ -108,7 +108,7 @@ Resources:
     Type: AWS::S3::Bucket
     DependsOn: LambdaInvokePermission
     Properties:
-      AccessControl: Public
+      AccessControl: PublicReadWrite
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
         BlockPublicPolicy: false
