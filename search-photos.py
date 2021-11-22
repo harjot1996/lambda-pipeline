@@ -40,7 +40,7 @@ def search_photos(one, two, three):
     return output
    
 def generate_response(images):
-    bucket_url = 'https://b2-foto.s3.us-east-1.amazonaws.com/'
+    bucket_url = 'https://b2-photos-zero-cf.s3.us-east-1.amazonaws.com/'
     results = []
     for img in images:
         name, labels = img
