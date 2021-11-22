@@ -2,6 +2,16 @@ import json
 import boto3
 import urllib3
 
+def singular(word):
+    if not word:
+        return
+    if word.endswith('es'):
+        return word[:-2]
+    elif word.endswith('s'):
+        return word[:-1]
+    else:
+        return word
+
 def fetch_from_opensearch(keyword):
     url = "https://vpc-photos-zvgzdxzcebvr2rrlzjki5wwchm.us-east-1.es.amazonaws.com/photos/_search?q="+keyword
     awsauth = 'user:Pa$$word2020'
@@ -60,5 +70,8 @@ def lambda_handler(event, context):
     one = response_lex["slots"]["one"]
     two = response_lex["slots"]["two"]
     three = response_lex["slots"]["three"]
+    one = singular(one)
+    two = singular(two)
+    three = singular(three)
     photos = search_photos(one, two, three)
     return generate_response(photos)
